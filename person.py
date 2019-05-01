@@ -1,10 +1,10 @@
 import pygame
 pygame.init()
 
-left = [pygame.image.load('pics/walk2.png'), pygame.image.load('pics/walk1.png')]
-jump = pygame.image.load('pics/jump.png')
 
 class player(object):
+    left1 = [pygame.image.load('pics/walk2.png'), pygame.image.load('pics/walk1.png')]
+    jump1 = pygame.image.load('pics/jump.png')
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
@@ -13,6 +13,9 @@ class player(object):
         self.vel = 15
         self.jump = False
         self.left = True
+        self.switch = False
+        self.switch2 = False
+        self.first = True
         self.walkCount = 0
         self.jumpCount = 25
         self.hitbox = (self.x + 5, self.y + 10, self.width - 10, self.height - 20)
@@ -35,10 +38,19 @@ class player(object):
             self.walkCount = 0
 
         if self.left:
-            win.blit(left[self.walkCount // 30], (self.x, self.y))
+            win.blit(self.left1[self.walkCount // 30], (self.x, self.y))
             self.walkCount += 1
 
         if self.jump:
-            win.blit(jump, (self.x, self.y))
+            win.blit(self.jump1, (self.x, self.y))
+
+        if self.switch:
+            self.left1 = [pygame.image.load('pics/walk_2.png'), pygame.image.load('pics/walk_1.png')]
+            self.jump1 = pygame.image.load('pics/jump1.png')
+
+        if self.switch2:
+            self.left1 = [pygame.image.load('pics/walk2_2.png'), pygame.image.load('pics/walk1_1.png')]
+            self.jump1 = pygame.image.load('pics/jump2.png')
 
         self.hitbox = (self.x + 5, self.y + 10, self.width - 10, self.height - 20)
+
